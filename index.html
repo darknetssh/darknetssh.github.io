@@ -2,15 +2,15 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Solicitação de Produtos</title>
+    <title>Carregar Dados Automaticamente</title>
 </head>
 <body>
-    <h1>Produtos</h1>
-    <button id="fetchButton">Carregar Dados</button>
+    <h1>Dados Carregados Automaticamente</h1>
     <pre id="jsonData"></pre>
 
     <script>
-        document.getElementById('fetchButton').addEventListener('click', function() {
+        // Função para fazer a solicitação e processar a resposta
+        function fetchData() {
             fetch('https://baserow.recargasocial.top/api/database/rows/table/516/?user_field_names=true', {
                 method: 'GET',
                 headers: {
@@ -22,7 +22,10 @@
                 document.getElementById('jsonData').textContent = JSON.stringify(data, null, 2);
             })
             .catch(error => console.error('Erro ao buscar dados:', error));
-        });
+        }
+
+        // Chama a função fetchData assim que a página for carregada
+        window.onload = fetchData;
     </script>
 </body>
 </html>
